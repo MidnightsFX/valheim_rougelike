@@ -133,6 +133,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <!-- JotunnLib's reference list still carries assemblies that Valheim's Unity version
+         dropped. Nothing here uses them, and leaving them in warns MSB3245 every build. -->
+    <Reference Remove="UnityEngine.ProfilerModule" Condition="!Exists('$(VALHEIM_MANAGED)/UnityEngine.ProfilerModule.dll')" />
+  </ItemGroup>
+
+  <ItemGroup>
     <!-- Everything else - ~80 Unity, BepInEx and publicized game assemblies -
          comes from build/JotunnLibRefsCorlib.props inside the JotunnLib package,
          which NuGet imports automatically via obj\Deathlink.csproj.nuget.g.props.

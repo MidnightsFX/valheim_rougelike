@@ -60,12 +60,13 @@ public static class DeathProgressionSkill
             {
                 lastSkillIncreaseTickTime = timeSinceGameStart + ValConfig.SkillProgressUpdateCheckInterval.Value;
                 PlayerProfile profile = Game.instance.GetPlayerProfile();
-                _bossKills = profile.m_playerStats.m_stats[PlayerStatType.BossKills];
-                _enemykills = profile.m_playerStats.m_stats[PlayerStatType.EnemyKills];
-                _piecesBuilt = profile.m_playerStats.m_stats[PlayerStatType.Builds];
-                _treesChopped = profile.m_playerStats.m_stats[PlayerStatType.TreeChops];
-                _mineAmount = profile.m_playerStats.m_stats[PlayerStatType.Mines];
-                _craftAndUpgrades = profile.m_playerStats.m_stats[PlayerStatType.CraftsOrUpgrades];
+                var stats = profile.m_playerStats[PlayerProfile.c_RawStats].m_stats;
+                _bossKills = stats[PlayerStatType.BossKills];
+                _enemykills = stats[PlayerStatType.EnemyKills];
+                _piecesBuilt = stats[PlayerStatType.Builds];
+                _treesChopped = stats[PlayerStatType.TreeChops];
+                _mineAmount = stats[PlayerStatType.Mines];
+                _craftAndUpgrades = stats[PlayerStatType.CraftsOrUpgrades];
             }
             // Logger.Debug($"DeathSkill increase interval check: {timeSinceGameStart} > {lastSkillIncreaseTickTime}");
             if (timeSinceGameStart > lastSkillIncreaseTickTime)
@@ -74,12 +75,13 @@ public static class DeathProgressionSkill
                 lastSkillIncreaseTickTime = timeSinceGameStart + ValConfig.SkillProgressUpdateCheckInterval.Value;
 
                 PlayerProfile profile = Game.instance.GetPlayerProfile();
-                float bkillstat = profile.m_playerStats.m_stats[PlayerStatType.BossKills];
-                float killstat = profile.m_playerStats.m_stats[PlayerStatType.EnemyKills];
-                float builtpieces = profile.m_playerStats.m_stats[PlayerStatType.Builds];
-                float treesChopped = profile.m_playerStats.m_stats[PlayerStatType.TreeChops];
-                float miningAmount = profile.m_playerStats.m_stats[PlayerStatType.Mines];
-                float craftAndUpgrade = profile.m_playerStats.m_stats[PlayerStatType.CraftsOrUpgrades];
+                var stats = profile.m_playerStats[PlayerProfile.c_RawStats].m_stats;
+                float bkillstat = stats[PlayerStatType.BossKills];
+                float killstat = stats[PlayerStatType.EnemyKills];
+                float builtpieces = stats[PlayerStatType.Builds];
+                float treesChopped = stats[PlayerStatType.TreeChops];
+                float miningAmount = stats[PlayerStatType.Mines];
+                float craftAndUpgrade = stats[PlayerStatType.CraftsOrUpgrades];
                 float craftupgradexp = 0;
                 float mineharvestxp = 0;
                 float treeharvestxp = 0;

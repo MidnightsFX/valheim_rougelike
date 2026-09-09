@@ -206,7 +206,11 @@ namespace Deathlink.Death
             PlayerProfile profile = Game.instance != null ? Game.instance.GetPlayerProfile() : null;
             if (profile == null || profile.m_playerStats == null) { return null; }
 
-            var stats = profile.m_playerStats.m_stats;
+            // m_playerStats is bucketed by achievement difficulty; slot c_RawStats
+            // is the unconditional lifetime total across every difficulty.
+            PlayerProfile.PlayerStats rawStats = profile.m_playerStats[PlayerProfile.c_RawStats];
+            if (rawStats == null) { return null; }
+            var stats = rawStats.m_stats;
 
             // Flush this session's accumulated damage into the persistent unique key.
             long persistedDamage = GetLongKey(player, LeaderboardDamageKey);
